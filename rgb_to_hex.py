@@ -9,15 +9,14 @@ hex_lookup = {
 }
 
 def rgb_to_hex(r, g, b):
-    global complete_hex_code
-
+    
     # Reject invalid RGB values
-    if r < 0 or r > 255:
-        raise ValueError("Red must be between 0 and 255")
-    if g < 0 or g > 255:
-        raise ValueError("Green must be between 0 and 255")
-    if b < 0 or b > 255:
-        raise ValueError("Blue must be between 0 and 255")
+    if (not isinstance(r, int)) or (r < 0) or (r > 255):
+        raise ValueError("Red must be an integer between 0 and 255")
+    if (not isinstance(g, int)) or (g < 0) or (g > 255):
+        raise ValueError("Green must be an integer between 0 and 255")
+    if (not isinstance(b, int)) or (b < 0) or (b > 255):
+        raise ValueError("Blue must be an integer between 0 and 255")
         
     # Red part of RGB
     # Divide by 16 to find first hexadecimal digit
@@ -26,13 +25,13 @@ def rgb_to_hex(r, g, b):
 
     # Check if whole number maps to hex letter and if it doesnt keep it as a number
     r_digit_one = hex_lookup.get(r_parts[0])
-    if r_digit_one == None:
+    if r_digit_one is None:
         r_digit_one = int(r_parts[0])
 
-    # Convert the decimal part back to an actual decimal and find the hexadecimal digit
+    # Recovering the fractional part and multiplying it by 16 to get the second digit and find the hexadecimal digit
     r_decimal = (int(r_parts[1]) / (10 ** len(str(r_parts[1])))) * 16
     r_digit_two = hex_lookup.get(str(int(r_decimal)))
-    if r_digit_two == None:
+    if r_digit_two is None:
         r_digit_two = int(r_decimal)
 
     # Green part of RGB
@@ -42,13 +41,13 @@ def rgb_to_hex(r, g, b):
 
     # Check if whole number maps to hex letter and if it doesnt keep it as a number
     g_digit_one = hex_lookup.get(g_parts[0])
-    if g_digit_one == None:
+    if g_digit_one is None:
         g_digit_one = int(g_parts[0])
 
-    # Convert the decimal part back to an actual decimal and find the hexadecimal digit
+    # Recovering the fractional part and multiplying it by 16 to get the second digit and find the hexadecimal digit
     g_decimal = (int(g_parts[1]) / (10 ** len(str(g_parts[1])))) * 16
     g_digit_two = hex_lookup.get(str(int(g_decimal)))
-    if g_digit_two == None:
+    if g_digit_two is None:
         g_digit_two = int(g_decimal)
     
     # Blue part of RGB
@@ -58,20 +57,20 @@ def rgb_to_hex(r, g, b):
 
     # Check if whole number maps to hex letter and if it doesnt keep it as a number
     b_digit_one = hex_lookup.get(b_parts[0])
-    if b_digit_one == None:
+    if b_digit_one is None:
         b_digit_one = int(b_parts[0])
 
-    # Convert the decimal part back to an actual decimal and find the hexadecimal digit
+    # Recovering the fractional part and multiplying it by 16 to get the second digit and find the hexadecimal digit
     b_decimal = (int(b_parts[1]) / (10 ** len(str(b_parts[1])))) * 16
     b_digit_two = hex_lookup.get(str(int(b_decimal)))
-    if b_digit_two == None:
+    if b_digit_two is None:
         b_digit_two = int(b_decimal)
 
-    # Combine it all to make a complete hex colour code
-    complete_hex_code = '#' + str(r_digit_one) + str(r_digit_two) + str(g_digit_one) + str(g_digit_two) + str(b_digit_one) + str(b_digit_two)
+    # Combine it all to make a complete hex colour code and return it
+    return('#' + str(r_digit_one) + str(r_digit_two) + str(g_digit_one) + str(g_digit_two) + str(b_digit_one) + str(b_digit_two))
 
-# Run the function
-rgb_to_hex(r=119, g=119, b=199)
+# Run the function and set returned output to a variable (optionable of course)
+complete_hex_code = rgb_to_hex(r=119, g=119, b=199)
 
-# Print the functions output
+# Print the variable
 print(complete_hex_code)
