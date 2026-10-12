@@ -10,7 +10,7 @@ hex_lookup = {
 
 def rgb_to_hex(r, g, b):
     
-    # Reject invalid RGB values
+    # Reject invalid RGB values to ensure valid colour values
     if not isinstance(r, int) or isinstance(r, bool) or (r < 0) or (r > 255):
         raise ValueError("Red must be an integer between 0 and 255")
     if not isinstance(g, int) or isinstance(g, bool) or (g < 0) or (g > 255):
@@ -18,55 +18,43 @@ def rgb_to_hex(r, g, b):
     if not isinstance(b, int) or isinstance(b, bool) or (b < 0) or (b > 255):
         raise ValueError("Blue must be an integer between 0 and 255")
         
-    # Red part of RGB
-    # Divide by 16 to find first hexadecimal digit
-    r_division_str = str(r / 16)
-    r_parts = r_division_str.split(".")
+    # Convert red RGB value into two hexadecimal digits
 
-    # Check if whole number maps to hex letter and if it doesnt keep it as a number
-    r_digit_one = hex_lookup.get(r_parts[0])
-    if r_digit_one is None:
-        r_digit_one = int(r_parts[0])
+    # Calculate the first hexadecimal digit with integer division
+    r_digit_one = r // 16
 
-    # Recovering the fractional part and multiplying it by 16 to get the second digit and find the hexadecimal digit
-    r_decimal = (int(r_parts[1]) / (10 ** len(str(r_parts[1])))) * 16
-    r_digit_two = hex_lookup.get(str(int(r_decimal)))
-    if r_digit_two is None:
-        r_digit_two = int(r_decimal)
+    # Calculate the second hexadecimal digit using the remainder
+    r_digit_two = r % 16
 
-    # Green part of RGB
-    # Divide by 16 to find first hexadecimal digit
-    g_division_str = str(g / 16)
-    g_parts = g_division_str.split(".")
-
-    # Check if whole number maps to hex letter and if it doesnt keep it as a number
-    g_digit_one = hex_lookup.get(g_parts[0])
-    if g_digit_one is None:
-        g_digit_one = int(g_parts[0])
-
-    # Recovering the fractional part and multiplying it by 16 to get the second digit and find the hexadecimal digit
-    g_decimal = (int(g_parts[1]) / (10 ** len(str(g_parts[1])))) * 16
-    g_digit_two = hex_lookup.get(str(int(g_decimal)))
-    if g_digit_two is None:
-        g_digit_two = int(g_decimal)
+    # Convert numerals from 10-15 into letters using the hex_lookup dictionary
+    r_digit_one = hex_lookup.get(str(r_digit_one), r_digit_one)
+    r_digit_two = hex_lookup.get(str(r_digit_two), r_digit_two)
     
-    # Blue part of RGB
-    # Divide by 16 to find first hexadecimal digit
-    b_division_str = str(b / 16)
-    b_parts = b_division_str.split(".")
+    # Convert green RGB value into two hexadecimal digits
+    
+    # Calculate the first hexadecimal digit with integer division
+    g_digit_one = g // 16
 
-    # Check if whole number maps to hex letter and if it doesnt keep it as a number
-    b_digit_one = hex_lookup.get(b_parts[0])
-    if b_digit_one is None:
-        b_digit_one = int(b_parts[0])
+    # Calculate the second hexadecimal digit using the remainder
+    g_digit_two = g % 16
 
-    # Recovering the fractional part and multiplying it by 16 to get the second digit and find the hexadecimal digit
-    b_decimal = (int(b_parts[1]) / (10 ** len(str(b_parts[1])))) * 16
-    b_digit_two = hex_lookup.get(str(int(b_decimal)))
-    if b_digit_two is None:
-        b_digit_two = int(b_decimal)
+    # Convert numerals from 10-15 into letters using the hex_lookup dictionary
+    g_digit_one = hex_lookup.get(str(g_digit_one), g_digit_one)
+    g_digit_two = hex_lookup.get(str(g_digit_two), g_digit_two)
 
-    # Combine it all to make a complete hex colour code and return it
+    # Convert blue RGB value into two hexadecimal digits
+    
+    # Calculate the first hexadecimal digit with integer division
+    b_digit_one = b // 16
+
+    # Calculate the second hexadecimal digit using the remainder
+    b_digit_two = b % 16
+
+    # Convert numerals from 10-15 into letters using the hex_lookup dictionary
+    b_digit_one = hex_lookup.get(str(b_digit_one), b_digit_one)
+    b_digit_two = hex_lookup.get(str(b_digit_two), b_digit_two)
+
+    # Combine all hexadecimal digits into a hex code
     return('#' + str(r_digit_one) + str(r_digit_two) + str(g_digit_one) + str(g_digit_two) + str(b_digit_one) + str(b_digit_two))
 
 # Run the function and set returned output to a variable (optionable of course)
