@@ -54,7 +54,7 @@ def rgb_to_hex(r, g, b):
     b_digit_one = hex_lookup.get(str(b_digit_one), b_digit_one)
     b_digit_two = hex_lookup.get(str(b_digit_two), b_digit_two)
 
-    # Combine all hexadecimal digits into a hex code
+    # Combine all hexadecimal digits into a hex code and return it
     return('#' + str(r_digit_one) + str(r_digit_two) + str(g_digit_one) + str(g_digit_two) + str(b_digit_one) + str(b_digit_two))
 
 # Run the function and set returned output to a variable (optionable of course)
