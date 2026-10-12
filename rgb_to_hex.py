@@ -11,6 +11,14 @@ hex_lookup = {
 def rgb_to_hex(r, g, b):
     global complete_hex_code
 
+    # Reject invalid RGB values
+    if r < 0 or r > 255:
+        raise ValueError("Red must be between 0 and 255")
+    if g < 0 or g > 255:
+        raise ValueError("Green must be between 0 and 255")
+    if b < 0 or b > 255:
+        raise ValueError("Blue must be between 0 and 255")
+        
     # Red part of RGB
     # Divide by 16 to find first hexadecimal digit
     r_division_str = str(r / 16)
