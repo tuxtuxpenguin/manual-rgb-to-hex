@@ -11,11 +11,11 @@ hex_lookup = {
 def rgb_to_hex(r, g, b):
     
     # Reject invalid RGB values
-    if (not isinstance(r, int)) or (r < 0) or (r > 255):
+    if not isinstance(r, int) or isinstance(r, bool) or (r < 0) or (r > 255):
         raise ValueError("Red must be an integer between 0 and 255")
-    if (not isinstance(g, int)) or (g < 0) or (g > 255):
+    if not isinstance(g, int) or isinstance(g, bool) or (g < 0) or (g > 255):
         raise ValueError("Green must be an integer between 0 and 255")
-    if (not isinstance(b, int)) or (b < 0) or (b > 255):
+    if not isinstance(b, int) or isinstance(b, bool) or (b < 0) or (b > 255):
         raise ValueError("Blue must be an integer between 0 and 255")
         
     # Red part of RGB
